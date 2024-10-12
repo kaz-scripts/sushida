@@ -38,7 +38,6 @@ HTMLCanvasElement.prototype.getContext = new Proxy(HTMLCanvasElement.prototype.g
 });
 
 function getImageData(newWidth = 350) {
-    //made this function with chatgpt lol
     const originalWidth = 440;
     const originalHeight = 30;
     const pixels = new Uint8Array(originalWidth * originalHeight * 4);
@@ -75,10 +74,10 @@ function getImageData(newWidth = 350) {
         const g = newPixels[i + 1];
         const b = newPixels[i + 2];
         const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-
-        const threshold = 150; // 10000yen
-        //const threshold = 120 // 3000yen
-        const color = brightness > threshold ? 255 : 0;
+        //const threshold = 100; //3000yen
+        //const threshold = 120; //10000yen
+        const threshold = 110; // 3000yen, 10000yen
+        const color = brightness > threshold ? 0 : 255;
         binaryPixels[i] = color;
         binaryPixels[i + 1] = color;
         binaryPixels[i + 2] = color;
@@ -87,8 +86,8 @@ function getImageData(newWidth = 350) {
 
     function floodFill(x, y) {
         const stack = [[x, y]];
-        const colorToReplace = [255, 255, 255, 255];
-        const newColor = [0, 0, 0, 255];
+        const colorToReplace = [0, 0, 0, 255];
+        const newColor = [255, 255, 255, 255];
 
         while (stack.length) {
             const [cx, cy] = stack.pop();
@@ -114,17 +113,18 @@ function getImageData(newWidth = 350) {
     }
 
     for (let y = 0; y < originalHeight; y++) {
-        if (binaryPixels[y * newWidth * 4] === 255) {
+        if (binaryPixels[y * newWidth * 4] === 0) {
             floodFill(0, y);
         }
 
-        if (binaryPixels[y * newWidth * 4 + (newWidth - 1) * 4] === 255) {
+        if (binaryPixels[y * newWidth * 4 + (newWidth - 1) * 4] === 0) {
             floodFill(newWidth - 1, y);
         }
     }
 
     return new ImageData(new Uint8ClampedArray(binaryPixels), newWidth, originalHeight);
 }
+
 
 
 let ocrCanvas, ctx, ocrDiv, canvas, gl, toggleButton, isActive;
@@ -201,7 +201,7 @@ function ocr() {
                     }
                 }
             }
-            await sleep(0)
+            await sleep(50)
         }
         await worker.terminate();
     })();
