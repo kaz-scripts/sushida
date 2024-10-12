@@ -125,8 +125,8 @@ function getImageData(newWidth = 350) {
         const b = newPixels[i + 2];
         const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
-        const threshold = 125;
-        //const threshold = Math.floor(Math.random() * (175 - 100 + 1)) + 100
+        const threshold = 150; // 10000yen
+        //const threshold = 120 // 3000yen
         const color = brightness > threshold ? 255 : 0;
         binaryPixels[i] = color;
         binaryPixels[i + 1] = color;
