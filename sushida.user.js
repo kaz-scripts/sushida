@@ -37,55 +37,6 @@ HTMLCanvasElement.prototype.getContext = new Proxy(HTMLCanvasElement.prototype.g
     }
 });
 
-/*
-function getImageData(newWidth=350) {
-    const originalWidth = 440;
-    const originalHeight = 30;
-    const pixels = new Uint8Array(originalWidth * originalHeight * 4);
-    gl.readPixels(30, 165, originalWidth, originalHeight, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-
-    const flippedPixels = new Uint8Array(pixels.length);
-    for (let y = 0; y < originalHeight; y++) {
-        for (let x = 0; x < originalWidth; x++) {
-            const srcIndex = (y * originalWidth + x) * 4;
-            const destIndex = ((originalHeight - 1 - y) * originalWidth + x) * 4;
-            flippedPixels[destIndex] = pixels[srcIndex];
-            flippedPixels[destIndex + 1] = pixels[srcIndex + 1];
-            flippedPixels[destIndex + 2] = pixels[srcIndex + 2];
-            flippedPixels[destIndex + 3] = pixels[srcIndex + 3];
-        }
-    }
-
-    const offset = Math.floor((originalWidth - newWidth) / 2);
-    const newPixels = new Uint8Array(newWidth * originalHeight * 4);
-
-    for (let y = 0; y < originalHeight; y++) {
-        for (let x = 0; x < newWidth; x++) {
-            const srcIndex = (y * originalWidth + (x + offset)) * 4;
-            const destIndex = (y * newWidth + x) * 4;
-            newPixels[destIndex] = flippedPixels[srcIndex];
-            newPixels[destIndex + 1] = flippedPixels[srcIndex + 1];
-            newPixels[destIndex + 2] = flippedPixels[srcIndex + 2];
-            newPixels[destIndex + 3] = flippedPixels[srcIndex + 3];
-        }
-    }
-
-    const grayPixels = new Uint8Array(newPixels.length);
-    for (let i = 0; i < newPixels.length; i += 4) {
-        const r = newPixels[i];
-        const g = newPixels[i + 1];
-        const b = newPixels[i + 2];
-        const gray = 0.299 * r + 0.587 * g + 0.114 * b;
-        grayPixels[i] = gray;
-        grayPixels[i + 1] = gray;
-        grayPixels[i + 2] = gray;
-        grayPixels[i + 3] = newPixels[i + 3];
-    }
-
-    return new ImageData(new Uint8ClampedArray(grayPixels), newWidth, originalHeight);
-}
-*/
-
 function getImageData(newWidth = 350) {
     //made this function with chatgpt lol
     const originalWidth = 440;
