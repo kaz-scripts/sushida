@@ -56,7 +56,6 @@ function getImageData(newWidth=350) {
         }
     }
 
-    // 新しい幅を計算する
     const offset = Math.floor((originalWidth - newWidth) / 2);
     const newPixels = new Uint8Array(newWidth * originalHeight * 4);
 
@@ -126,7 +125,8 @@ function getImageData(newWidth = 350) {
         const b = newPixels[i + 2];
         const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
-        const threshold = 150;
+        const threshold = 125;
+        //const threshold = Math.floor(Math.random() * (175 - 100 + 1)) + 100
         const color = brightness > threshold ? 255 : 0;
         binaryPixels[i] = color;
         binaryPixels[i + 1] = color;
@@ -250,7 +250,7 @@ function ocr() {
                     }
                 }
             }
-            await sleep(500)
+            await sleep(0)
         }
         await worker.terminate();
     })();
