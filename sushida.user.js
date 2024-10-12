@@ -26,8 +26,6 @@ function press(key, delay = 1) {
     }
 }
 
-
-
 HTMLCanvasElement.prototype.getContext = new Proxy(HTMLCanvasElement.prototype.getContext, {
     apply(target, thisArg, argumentsList) {
         if (argumentsList[1]) {
@@ -185,7 +183,6 @@ function sleep(ms) {
 function ocr() {
     (async () => {
         await loadTesseract();
-        console.log('Tesseract.js loaded');
         const worker = await window.Tesseract.createWorker('eng');
         while(true) {
             const { data: { text } } = await worker.recognize(ocrCanvas.toDataURL());
