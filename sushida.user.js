@@ -4,7 +4,7 @@
 // @version      2024-10-11
 // @description  lazy?
 // @author       wakka
-// @match        https://sushida.net/play.html
+// @match        https://sushida.net/play.html*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=sushida.net
 // @grant        none
 // @run-at       document-start
@@ -74,9 +74,7 @@ function getImageData(newWidth = 350) {
         const g = newPixels[i + 1];
         const b = newPixels[i + 2];
         const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-        //const threshold = 100; //3000yen
-        //const threshold = 120; //10000yen
-        const threshold = 110; // 3000yen, 10000yen
+        const threshold = 110;
         const color = brightness > threshold ? 0 : 255;
         binaryPixels[i] = color;
         binaryPixels[i + 1] = color;
