@@ -31,7 +31,7 @@ HTMLCanvasElement.prototype.getContext = new Proxy(HTMLCanvasElement.prototype.g
         if (args[1]) {
             args[1].preserveDrawingBuffer = true;
         }
-        return Reflect.apply(target, thisArg, argumentsList);
+        return Reflect.apply(target, thisArg, args);
     }
 });
 
