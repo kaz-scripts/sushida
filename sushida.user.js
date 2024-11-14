@@ -27,13 +27,15 @@ function press(key, delay = 1) {
 }
 
 HTMLCanvasElement.prototype.getContext = new Proxy(HTMLCanvasElement.prototype.getContext, {
-    apply(target, thisArg, argumentsList) {
-        if (argumentsList[1]) {
-            argumentsList[1].preserveDrawingBuffer = true;
+    apply(target, thisArg, args) {
+        if (args[1]) {
+            args[1].preserveDrawingBuffer = true;
         }
         return Reflect.apply(target, thisArg, argumentsList);
     }
 });
+
+Object.freeze(HTMLCanvasElement);
 
 function getImageData(newWidth = 350) {
     const originalWidth = 440;
